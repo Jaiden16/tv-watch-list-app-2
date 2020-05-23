@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var genreRouter = require('./routes/genres');
 var showsRouter = require('./routes/shows');
+var commentsRouter = require(`./routes/comments`)
 
 var app = express();
 
@@ -22,5 +23,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/genres',genreRouter);
 app.use('/shows', showsRouter);
+app.use(`/comments`, commentsRouter);
 
 module.exports = app;
