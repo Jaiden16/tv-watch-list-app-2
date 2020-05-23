@@ -27,10 +27,10 @@ const PostGenre = async (req, res) => {
   }
   try {
     if (req.body.genre_name) {
-    let newUser = await db.one(`INSERT into genres (username, avatar_url) 
-    Values ($/username/,$/avatar_url/) RETURNING *`, userObject)
+    let newGenre = await db.one(`INSERT into genres (genre_name) 
+    Values ($/genre_name/) RETURNING *`, genreObject)
     res.json({
-      user: newUser,
+      user: newGenre,
       message:"Success"
     })
 
@@ -46,8 +46,7 @@ const PostGenre = async (req, res) => {
 }
 
 /* GET users listing. */
-router.get('/', GetAllUsers);
-router.get('/:id', GetSingleUser);
-router.post('/',PostUser)
+router.get('/', GetAllGenres);
+router.post('/',PostGenre)
 
 module.exports = router;
