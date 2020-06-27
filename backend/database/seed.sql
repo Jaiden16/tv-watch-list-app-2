@@ -18,7 +18,6 @@ CREATE TABLE shows (
     id SERIAL PRIMARY KEY,
     title VARCHAR NOT NULL,
     img_url VARCHAR NOT NULL,
-    user_id INT REFERENCES users(id),
     genre_id INT REFERENCES genres(id)
 );
 

@@ -80,7 +80,7 @@ const ShowsByGenre = async (req, res) =>{
 
 const ShowsByUserId = async (req,res) =>{
     try{
-        let showsUser = await db.any(`Select * From shows Where user_id = ${req.params.user_id}`)
+        let showsUser = await db.any(`Select * From shows_users Where user_id = ${req.params.user_id}`)
         res.json({
             showsUser:showsUser,
             message: "Success"
