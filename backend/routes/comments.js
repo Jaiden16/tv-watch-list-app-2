@@ -3,23 +3,49 @@ var router = express.Router();
 const db = require("../database/database.js");
 
 //Get Comment by show
-const GetShowComments = async (req,res) => {
-    try{
+const GetShowComments = async (req, res) => {
+    try {
         let showComments = await db.any(`SELECT * FROM comments Where show_id = ${req.params.show_id}`)
         res.json({
             comments: showComments,
             message: `Success`
         })
 
-    }catch(err){
+    } catch (err) {
         console.log(`Error ${err}`)
         res.json({
-            message:`Error`
+            message: `Error`
         })
     }
 }
 
-router.get('/show/:show_id',GetShowComments);
+const PostComment = async (req, res) => {
+    let commentObject = {
+        comment_body: req.body.comment_body,
+        user_id: req.body.user_id,
+        show_id: req.body.show_id
+    }
+    let query = `INSERT into comments(comment_body,user_id, show_id)
+    Values ($/comment_body/,$/user_id/,$/show_id/)`
+    try {
+        console.log('Posted')
+        let postComment = await db.one(query, commentObject)
+        res.json({
+            comment: postComment,
+            message: "Comment posted"
+        })
+
+    } catch (err) {
+        console.log(err)
+        res.json({
+            err: err
+        })
+    }
+
+}
+
+router.get('/show/:show_id', GetShowComments);
+router.post('/comment', PostComment)
 
 
 module.exports = router;
