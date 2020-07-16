@@ -1,0 +1,8 @@
+.all-shows{
+    display: grid;
+    grid-template-columns: 100%;
+    text-align: center;
+    /* border: 1px solid black; */
+    /* width: 100vw;
+    height: 100vh; */
+}

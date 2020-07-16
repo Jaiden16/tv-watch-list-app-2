@@ -44,6 +44,7 @@ const PostNewShow = async (req, res) => {
         user_id: req.body.user_id,
         genre_id: req.body.genre_id
     }
+    //todo create two insert queries 
 
     try {
         if (req.body.title, req.body.img_url, req.body.user_id, req.body.genre_id) {
@@ -62,15 +63,15 @@ const PostNewShow = async (req, res) => {
     }
 }
 
-const ShowsByGenre = async (req, res) =>{
-    try{
+const ShowsByGenre = async (req, res) => {
+    try {
         let showsGenre = await db.any(`Select * FROM shows WHERE genre_id = ${req.params.genre_id}`)
         res.json({
             showsGenre: showsGenre,
             message: "Success"
         })
 
-    }catch(err){
+    } catch (err) {
         console.log(`Error`, err)
         res.json({
             message: `error: ${err}`
@@ -78,15 +79,19 @@ const ShowsByGenre = async (req, res) =>{
     }
 }
 
-const ShowsByUserId = async (req,res) =>{
-    try{
-        let showsUser = await db.any(`Select * From shows_users Where user_id = ${req.params.user_id}`)
+const ShowsByUserId = async (req, res) => {
+    try {
+        let showsUser = await db.any(`
+        SELECT shows_users.user_id, shows_users.show_id, shows.title, shows.img_url, genres.genre_name  FROM shows_users
+        JOIN shows ON shows_users.show_id = shows.id    
+        JOIN genres ON shows.genre_id = genres.id
+        WHERE user_id = ${req.params.user_id}`)
         res.json({
-            showsUser:showsUser,
+            showsUser: showsUser,
             message: "Success"
         })
 
-    }catch(err){
+    } catch (err) {
         console.log(`Error`, err);
         res.json({
             message: `Error ${err}`
@@ -94,6 +99,22 @@ const ShowsByUserId = async (req,res) =>{
 
     }
 }
+
+const GetAllShowsUsers = async (req,res) =>{
+    let query =`SELECT shows_users.show_id, users.id, users.username, users.avatar_url FROM shows_users
+    JOIN users ON shows_users.user_id = users.id
+    WHERE show_id = ${req.params.show_id}`
+    try{
+        let showsUsers = await db.any(query)
+        res.json({
+            payload: showsUsers,
+            msg: "success"
+        })
+
+    }catch(err){
+        console.log(err)
+    }
+} 
 
 
 //Get shows
@@ -106,10 +127,14 @@ router.get('/:id', GetSingleShow);
 router.post('/', PostNewShow);
 
 //Get Show by genre.. genre/genre_id
-router.get('/genre/:genre_id',ShowsByGenre);
+router.get('/genre/:genre_id', ShowsByGenre);
 
 //Get Show by user.. user/user_id
-router.get('/user/:user_id',ShowsByUserId);
+router.get('/user/:user_id', ShowsByUserId);
+
+//Get a Shows Users
+router.get(`/shows/:show_id`,GetAllShowsUsers)
+
 
 
 module.exports = router;

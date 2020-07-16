@@ -53,7 +53,7 @@ INSERT INTO shows (title, img_url, genre_id)
         ('The Flash', 'https://image.tmdb.org/t/p/w370_and_h556_bestv2/jC1KqsFx8ZyqJyQa2Ohi7xgL7XC.jpg', 1),
         ('Naruto Shippūden', 'https://image.tmdb.org/t/p/w370_and_h556_bestv2/zAYRe2bJxpWTVrwwmBc00VFkAf4.jpg', 4),
         ('Greys Anatomy', 'https://image.tmdb.org/t/p/w370_and_h556_bestv2/eqgIOObafPJitt8JNh1LuO2fvqu.jpg', 2),
-        ('The Simpsons', 'https://image.tmdb.org/t/p/w370_and_h556_bestv2/yTZQkSsxUFJZJe67IenRM0AEklc.jpg', 3);
+        ('The Simpsons', 'https://cdn.telanganatoday.com/wp-content/uploads/2020/06/The-Simpsons.jpg', 3);
 
 
 -- INSERT SHOW_USERS relationships

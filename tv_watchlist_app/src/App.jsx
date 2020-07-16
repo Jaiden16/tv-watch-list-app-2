@@ -7,6 +7,9 @@ import { Switch, Route } from 'react-router-dom'
 import Homepage from "./components/HomePage"
 import NavBar from './components/NavBar';
 import ProfilePage from './components/ProfilePage'
+import AllShows from './components/AllShow';
+import AllUsers from './components/AllUsers';
+import ShowPage from './components/ShowPage';
 
 class App extends Component {
   constructor() {
@@ -24,16 +27,16 @@ class App extends Component {
     let { id } = this.state
     let url = `http://localhost:3001/users/${id}`
     axios.get(url).then((res) => {
-      console.log(res)
+      // console.log(res)
       let user = res.data.user
-      console.log(user)
+      // console.log(user)
       let { username, avatar_url } = user
       this.setState({
         username: username,
         avatar_url: avatar_url
       })
     }).catch((err) => {
-      console.log(err)
+      // console.log(err)
     })
 
   }
@@ -49,6 +52,27 @@ class App extends Component {
       avatar={this.state.avatar_url} />
   }
 
+  renderAllShows = () => {
+    return <AllShows/>
+  }
+
+  renderAddShows = () =>{
+    return(
+      <div>
+        Add Show Component
+      </div>
+    )
+  }
+
+  renderAllUsers = () =>{
+    return <AllUsers/>
+  }
+
+  renderShowPage = () =>{
+    return <ShowPage userId = {this.state.id}/>
+  }
+ 
+ 
   render() {
     let { username, avatar_url } = this.state
     return (
@@ -59,6 +83,10 @@ class App extends Component {
 
         <Switch>
           <Route path="/users/:id" component={ProfilePage} />
+          <Route path="/shows/:id" render = {this.renderShowPage} /> 
+          <Route path ="/addshows" render= {this.renderAddShows}/>
+          <Route path ="/shows" render ={this.renderAllShows}/>
+          <Route path="/users" render={this.renderAllUsers} />
           <Route exact path="/" render={this.renderHomepage} />
         </Switch>
       </div>

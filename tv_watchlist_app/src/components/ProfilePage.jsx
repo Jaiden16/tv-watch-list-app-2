@@ -1,35 +1,52 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import UserShow from './UserShowComponent'
 
 class ProfilePage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            userId: props.match.params.id
+            userId: props.match.params.id,
+            shows: []
 
         }
     }
 
-    getUsersShows= async () =>{
-        let {userId} = this.state
+    getUsersShows = async () => {
+        let { userId } = this.state
         let url = `http://localhost:3001/shows/user/${userId}`
-        try{
+        try {
             let shows = await axios.get(url)
-            console.log("user shows", shows)
+            // console.log("user shows", shows.data.showsUser)
+            let { showsUser } = shows.data
+            // console.log('data', showsUser)
+            this.setState({
+                shows: showsUser
+            })
 
-        }catch(err){
+        } catch (err) {
             console.log(err)
         }
 
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.getUsersShows()
     }
 
-    render(){
-        return(
-            <div>Profile Page</div>
+    render() {
+        let { shows } = this.state
+        return (
+            <div>Profile Page
+                {shows.map((el, index) => {
+                    return <UserShow
+                        key={index}
+                        title ={el.title}
+                        genre={el.genre_name}
+                        id={el.id}
+                        url={el.img_url} />
+                })}
+            </div>
         )
     }
 

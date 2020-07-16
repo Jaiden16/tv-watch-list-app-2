@@ -22,6 +22,6 @@ li a {
     background-color: lightskyblue;
 }
 
-a:hover:not(#brand) {
+a:hover:not(#brand, #user-list) {
     background-color: gray;
 }
