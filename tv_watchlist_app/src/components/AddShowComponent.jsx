@@ -9,7 +9,9 @@ export default class AddShow extends Component {
             movies: [],
             movie_value: "",
             genre: [],
-            genre_value: ""
+            genre_value: "",
+            url: "",
+            show_name: ""
 
         }
     }
@@ -52,6 +54,21 @@ export default class AddShow extends Component {
         })
     }
 
+    handleGenreChange = (e) =>{
+        console.log("value", e.target.value)
+        this.setState({
+            genre_value: e.target.value
+        })
+    }
+
+    handleTextChange = (e)=>{
+        console.log('target name',e.target.name)
+        console.log('target value',e.target.value)
+        this.setState({
+            [e.target.name] : e.target.value
+        })
+    }
+
     showSubmit = async (e) =>{
         e.preventDefault()
         let {movie_value} = this.state
@@ -77,7 +94,7 @@ export default class AddShow extends Component {
     }
 
     render() {
-        let { movies, movie_value, genre, genre_vale } = this.state
+        let { movies, genre } = this.state
 
 
         return (
@@ -101,23 +118,29 @@ export default class AddShow extends Component {
                         <h2>Or add a new show</h2>
                         <label htmlFor="url-label">Show Image Url</label><br />
                         <input id='url-label' 
-                        type='text' 
+                        type='text'
+                        name = "url" 
                         placeholder='paste url' 
                         required
+                        onChange = {this.handleTextChange}
+                        value = {this.state.url}
                         style = {{width: 180}}></input><br /> <br />
                         
                         <label htmlFor="show-name">Show Name</label><br />
-                        <input id='show-name' 
+                        <input id='show-name'
+                        name = "show_name" 
                         type='text' 
                         placeholder='type name' 
                         required
+                        onChange = {this.handleTextChange}
+                        value = {this.state.show_name}
                         style = {{width: 180}}></input><br /> <br />
                         
                         <label htmlFor="genre">genre</label><br />
-                        <select defaultValue = 'genre' style = {{width: 180}}>
+                        <select defaultValue = 'genre' onChange = {this.handleGenreChange} style = {{width: 180}}>
                             <option value = "genre" disabled>genre</option>
                             {genre.map((el) =>{
-                                return <option key = {el.id} value = {el.genre_name}>{el.genre_name}</option>
+                                return <option key = {el.id} value = {el.id}>{el.genre_name}</option>
                             })}
 
                         </select><br /> <br />
