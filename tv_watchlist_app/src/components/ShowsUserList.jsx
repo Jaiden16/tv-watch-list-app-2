@@ -4,7 +4,7 @@ import "../css/ShowsUserList.css"
 
 export default function ShowsUserlist(props) {
     let { users, height, width } = props
-    console.log('users', users)
+    // console.log('users', users)
 
     return (
             users.map((el, ind) => {

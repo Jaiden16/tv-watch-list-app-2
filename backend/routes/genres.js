@@ -8,7 +8,7 @@ const GetAllGenres = async (req, res) => {
     let allGenres = await db.any("SELECT * FROM genres")
 
     res.json({
-      users: allGenres,
+      genre: allGenres,
       message: "Success"
     })
 
@@ -27,7 +27,7 @@ const GetSingleGenres = async (req, res) => {
     let singleGenres = await db.any(`SELECT * FROM genres WHERE id = ${req.params.id}`)
 
     res.json({
-      users: singleGenres,
+      genre: singleGenres,
       message: "Success"
     })
 
@@ -49,7 +49,7 @@ const PostGenre = async (req, res) => {
     let newGenre = await db.one(`INSERT into genres (genre_name) 
     Values ($/genre_name/) RETURNING *`, genreObject)
     res.json({
-      user: newGenre,
+      genre: newGenre,
       message:"Success"
     })
 

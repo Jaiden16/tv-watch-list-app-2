@@ -10,10 +10,11 @@ import ProfilePage from './components/ProfilePage'
 import AllShows from './components/AllShow';
 import AllUsers from './components/AllUsers';
 import ShowPage from './components/ShowPage';
+import AddShow from './components/AddShowComponent';
 
 class App extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       id: 1,
       username: "",
@@ -58,9 +59,7 @@ class App extends Component {
 
   renderAddShows = () =>{
     return(
-      <div>
-        Add Show Component
-      </div>
+      <AddShow userId = {this.state.id}/>
     )
   }
 
@@ -83,7 +82,8 @@ class App extends Component {
 
         <Switch>
           <Route path="/users/:id" component={ProfilePage} />
-          <Route path="/shows/:id" render = {this.renderShowPage} /> 
+          <Route path="/shows/:id" render = {({match}) =>
+                  <ShowPage userId = {this.state.id} match = {match.params.id}/>} /> 
           <Route path ="/addshows" render= {this.renderAddShows}/>
           <Route path ="/shows" render ={this.renderAllShows}/>
           <Route path="/users" render={this.renderAllUsers} />

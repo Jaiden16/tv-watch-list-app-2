@@ -19,7 +19,7 @@ class MasterShow extends Component {
         let url = `/shows/shows/${id}`
         try {
             let res = await axios.get(url)
-            console.log(res.data.payload)
+            // console.log(res.data.payload)
             let { payload } = res.data
             this.setState({
                 users: payload

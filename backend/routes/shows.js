@@ -37,31 +37,7 @@ const GetSingleShow = async (req, res) => {
     }
 }
 
-const PostNewShow = async (req, res) => {
-    let showsObject = {
-        title: req.body.title,
-        img_url: req.body.img_url,
-        user_id: req.body.user_id,
-        genre_id: req.body.genre_id
-    }
-    //todo create two insert queries 
 
-    try {
-        if (req.body.title, req.body.img_url, req.body.user_id, req.body.genre_id) {
-            let newShow = await db.one(`INSERT into shows (title,img_url,user_id,genre_id) 
-            Values ($/title/, $/img_url/,$/user_id/, $/genre_id/)RETURNING *`, showsObject)
-            res.json({
-                show: newShow,
-                message: "Success"
-            })
-        }
-    } catch (err) {
-        console.log(err)
-        res.json({
-            message: `Error ${err}`
-        })
-    }
-}
 
 const ShowsByGenre = async (req, res) => {
     try {
@@ -114,7 +90,61 @@ const GetAllShowsUsers = async (req,res) =>{
     }catch(err){
         console.log(err)
     }
-} 
+}
+
+const PostNewShow = async (req, res) => {
+    let showsObject = {
+        title: req.body.title,
+        img_url: req.body.img_url,
+        user_id: req.body.user_id,
+        genre_id: req.body.genre_id
+    }
+    //todo create two insert queries 
+
+    try {
+        if (req.body.title, req.body.img_url, req.body.user_id, req.body.genre_id) {
+            let newShow = await db.one(`INSERT into shows (title,img_url,user_id,genre_id) 
+            Values ($/title/, $/img_url/,$/user_id/, $/genre_id/)RETURNING *`, showsObject)
+            res.json({
+                show: newShow,
+                message: "Success"
+            })
+        }
+    } catch (err) {
+        console.log(err)
+        res.json({
+            message: `Error ${err}`
+        })
+    }
+}
+
+
+
+const AddShowsUser = async (req, res) =>{
+    let showObj ={
+        show_id: req.body.show_id,
+        user_id: req.body.user_id
+    }
+    let query = `Insert into shows_users(show_id,user_id)
+    Values($/show_id/,$/user_id/) RETURNING *`
+
+    try{
+        let data = await db.one(query,showObj)
+        console.log(data)
+        res.json({
+            show: data,
+            msg: `posted ${showObj}`
+        })
+
+        
+    }catch(err){
+        console.log(err)
+        res.json({
+            data: null,
+            msg: 'something went wrong'
+        })
+    }
+}
 
 
 //Get shows
@@ -123,8 +153,6 @@ router.get('/', GetAllShows);
 //Get Shows/:id
 router.get('/:id', GetSingleShow);
 
-//Post
-router.post('/', PostNewShow);
 
 //Get Show by genre.. genre/genre_id
 router.get('/genre/:genre_id', ShowsByGenre);
@@ -135,6 +163,10 @@ router.get('/user/:user_id', ShowsByUserId);
 //Get a Shows Users
 router.get(`/shows/:show_id`,GetAllShowsUsers)
 
+//Post
+router.post('/newshow', PostNewShow);
+
+router.post('/newshowuser', AddShowsUser);
 
 
 module.exports = router;
