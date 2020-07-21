@@ -87,6 +87,25 @@ export default class AddShow extends Component {
 
     }
 
+    addNewShowSubmit = async (e) =>{
+        e.preventDefault()
+        let url = 'shows/newshow'
+        let newShowObj = {
+            title: this.state.show_name,
+            img_url: this.state.url,
+            genre_id: this.state.genre_value,
+            user_id: this.state.userId 
+
+        }
+        try{
+            let show = await axios.post(url, newShowObj)
+            console.log(show)
+
+        }catch(err){
+            console.log(err)
+        }
+    }
+
 
     componentDidMount() {
         this.getAllMovies()
@@ -114,7 +133,7 @@ export default class AddShow extends Component {
                 </div><br /><br />
 
                 <div>
-                    <form>
+                    <form onSubmit = {this.addNewShowSubmit}>
                         <h2>Or add a new show</h2>
                         <label htmlFor="url-label">Show Image Url</label><br />
                         <input id='url-label' 

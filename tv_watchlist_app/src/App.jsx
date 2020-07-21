@@ -11,6 +11,7 @@ import AllShows from './components/AllShow';
 import AllUsers from './components/AllUsers';
 import ShowPage from './components/ShowPage';
 import AddShow from './components/AddShowComponent';
+import About from "./components/AboutComponent"
 
 class App extends Component {
   constructor(props) {
@@ -87,6 +88,7 @@ class App extends Component {
           <Route path ="/addshows" render= {this.renderAddShows}/>
           <Route path ="/shows" render ={this.renderAllShows}/>
           <Route path="/users" render={this.renderAllUsers} />
+          <Route path="/about" component ={About} />
           <Route exact path="/" render={this.renderHomepage} />
         </Switch>
       </div>

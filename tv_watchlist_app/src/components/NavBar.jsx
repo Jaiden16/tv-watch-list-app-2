@@ -11,6 +11,7 @@ export default function NavBar(props) {
             <li id="nav-item"><Link to='/users' > Users </Link></li>
             <li id="nav-item"><Link to='/shows' > Shows </Link></li>
             <li id="nav-item"><Link to='/addshows' > Add Show </Link></li>
+            <li id="nav-item"><Link to='/about' > About </Link></li>
         </ul>
     )
 }

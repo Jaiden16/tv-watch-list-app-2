@@ -96,17 +96,22 @@ const PostNewShow = async (req, res) => {
     let showsObject = {
         title: req.body.title,
         img_url: req.body.img_url,
-        user_id: req.body.user_id,
-        genre_id: req.body.genre_id
+        genre_id: req.body.genre_id,
+        user_id: req.body.user_id
     }
+    let query = `INSERT into shows (title,img_url,genre_id) 
+    Values ($/title/, $/img_url/,$/genre_id/)RETURNING *`
+    let query2 = `INSERT into shows_users(show_id, user_id)
+    Values ($1, $2) RETURNING *`
     //todo create two insert queries 
 
     try {
         if (req.body.title, req.body.img_url, req.body.user_id, req.body.genre_id) {
-            let newShow = await db.one(`INSERT into shows (title,img_url,user_id,genre_id) 
-            Values ($/title/, $/img_url/,$/user_id/, $/genre_id/)RETURNING *`, showsObject)
+            let newShow = await db.one( query, showsObject)
+            let addShow =  await db.one (query2,[newShow.id,showsObject.user_id])
             res.json({
                 show: newShow,
+                addedShow: addShow,
                 message: "Success"
             })
         }
