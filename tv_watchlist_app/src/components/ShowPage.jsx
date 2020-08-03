@@ -41,10 +41,13 @@ export default class ShowPage extends Component {
         try {
             let res = await axios.get(url)
             console.log('res', res.data.comments)
-            let comment_body = res.data.comments
-            comment_body.map((el)=>{
-                comments.push(el.comment_body)
+            this.setState({
+                comments: res.data.comments
             })
+            // let comment_body = res.data.comments
+            // comment_body.map((el)=>{
+            //     comments.push(el.comment_body)
+            // })
             
             
 
@@ -120,7 +123,9 @@ export default class ShowPage extends Component {
                 <div>
                     <ul>
                         {comments.map((el,ind)=>{
-                            return <li key = {ind}>{el}</li>
+                            return <li key = {ind}>
+                                <p>{`${el.user_id}: ${el.comment_body}`}</p>
+                                </li>
                         })}
                     </ul>
 
