@@ -37,7 +37,7 @@ class ProfilePage extends Component {
     render() {
         let { shows } = this.state
         return (
-            <div>Profile Page
+            <div className = 'profile_page'>
                 {shows.map((el, index) => {
                     return <UserShow
                         key={index}

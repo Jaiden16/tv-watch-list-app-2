@@ -4,3 +4,8 @@
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 45px auto;
 }
+
+.HomePage{
+  grid-column: 1 / -1;
+
+}

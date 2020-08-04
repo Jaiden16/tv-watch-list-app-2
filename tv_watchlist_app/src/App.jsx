@@ -99,12 +99,26 @@ class App extends Component {
   }
 
   renderLandingPage = () => {
-    return <LandingPage logIn={this.userLogedin} />
+    return <LandingPage
+      logIn={this.userLogedin}
+      id={this.state.id} />
+  }
+
+  renderProfilePage = () => {
+    return <ProfilePage id={this.state.id} />
   }
 
   notLoggedIn = () => (
     <Switch>
-      <Route exact path='/' render={this.renderLandingPage} />
+      <Route exact path='/' render={(routeProps) => {
+        return (
+          <LandingPage
+            logIn={this.userLogedin}
+            id={this.state.id}
+            history={routeProps.history}
+          />
+        )
+      }} />
     </Switch>
 
   )
@@ -113,13 +127,12 @@ class App extends Component {
 
   LoggedIn = () => (
     <Switch>
-      <Route path="/users/:id" component={ProfilePage} />
+      <Route exact path="/users/:id" component={ProfilePage} />
       <Route path="/shows/:id" render={this.renderShowPage} />
       <Route path="/addshows" render={this.renderAddShows} />
       <Route path="/shows" render={this.renderAllShows} />
       <Route path="/users" render={this.renderAllUsers} />
       <Route path="/about" component={About} />
-      <Route exact path="/" render={this.renderHomepage} />
     </Switch>
   )
 
@@ -133,7 +146,7 @@ class App extends Component {
           className="NavBar"
           id={this.state.id}
           username={username}
-          login = {this.state.login}
+          login={this.state.login}
         />
         {
           login ? this.LoggedIn() : this.notLoggedIn()
