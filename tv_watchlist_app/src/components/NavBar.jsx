@@ -14,7 +14,7 @@ export default function NavBar(props) {
     } else {
         return (
             <ul className='nav-list'>
-                <li id="nav-item"><Link id="brand" to="/">TV</Link></li>
+                <li id="nav-item"><Link id="brand" to={`/users/${props.id}`}>TV</Link></li>
                 <li id="nav-item"><Link to={`/users/${props.id}`} >{props.username}</Link></li>
                 <li id="nav-item"><Link to='/users' > Users </Link></li>
                 <li id="nav-item"><Link to='/shows' > Shows </Link></li>

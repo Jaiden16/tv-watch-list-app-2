@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import UserShow from './UserShowComponent'
+import "../css/ProfilePage.css"
 
 class ProfilePage extends Component {
     constructor(props) {
@@ -14,10 +15,10 @@ class ProfilePage extends Component {
 
     getUsersShows = async () => {
         let { userId } = this.state
-        let url = `http://localhost:3001/shows/user/${userId}`
+        let url = `/shows/user/${userId}`
         try {
             let shows = await axios.get(url)
-            // console.log("user shows", shows.data.showsUser)
+            console.log("user shows", shows.data.showsUser)
             let { showsUser } = shows.data
             // console.log('data', showsUser)
             this.setState({
@@ -38,6 +39,8 @@ class ProfilePage extends Component {
         let { shows } = this.state
         return (
             <div className = 'profile_page'>
+                <h1 id = "welcome">Welcome {this.props.username}</h1>
+                <img id = "profile_img" src = {this.props.avatar} alt = "broken" />
                 {shows.map((el, index) => {
                     return <UserShow
                         key={index}

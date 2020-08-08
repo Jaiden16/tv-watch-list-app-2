@@ -1,10 +1,10 @@
-import React , {Component} from 'react'
+import React, { Component } from 'react'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
 import ShowsUserlist from './ShowsUserList'
+import "../css/AllUsers.css"
 
-export default class AllUsers extends Component{
-    constructor(props){
+export default class AllUsers extends Component {
+    constructor(props) {
         super(props)
         this.state = {
             users: []
@@ -12,30 +12,37 @@ export default class AllUsers extends Component{
         }
     }
 
-    getUsers = async() =>{
+    getUsers = async () => {
         let url = '/users'
-        try{
+        try {
             let res = await axios.get(url)
             console.log('res', res)
             let arr = res.data.users
             this.setState({
                 users: arr
             })
-            
-        }catch(err){
+
+        } catch (err) {
             console.log(err)
         }
     }
-    
-    componentDidMount(){
+
+    componentDidMount() {
         this.getUsers()
     }
 
-    render(){
-        let {users} = this.state
-        return(
-            <div>
-                <ShowsUserlist users = {users}/>
+    render() {
+        let { users } = this.state
+        return (
+            <div className="AllUsers">
+                <h1 id = "AllUsers_Title">Users</h1>
+                <div className = "UserList">
+                    <ShowsUserlist
+                        users={users}
+                        height={"100%"}
+                        width={"100%"} />
+                </div>
+
             </div>
         )
     }

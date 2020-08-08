@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import ShowComponent from './ShowComponent'
 import axios from 'axios'
 import '../css/AllShow.css'

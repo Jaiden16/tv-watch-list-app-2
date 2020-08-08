@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import pic from '../images/landing_page.jpg'
 import '../css/LandingPage.css'
 
 export default class LandingPage extends Component {
-    constructor(props){
-        super(props)
-
-    }
+    
     pushFunction = () =>{
         this.props.logIn()
         this.props.history.push(`/users/${this.props.id}`)

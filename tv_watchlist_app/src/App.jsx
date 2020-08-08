@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import { Switch, Route } from 'react-router-dom'
-import './App.css'
+import { Switch, Route, Redirect } from 'react-router-dom'
+// import './App.css'
 
 
-
+// components 
 import Homepage from "./components/HomePage"
 import NavBar from './components/NavBar';
 import ProfilePage from './components/ProfilePage'
@@ -22,7 +22,7 @@ class App extends Component {
       id: 2,
       username: "",
       avatar_url: "",
-      login: false
+      login: true
     }
   }
 
@@ -110,16 +110,20 @@ class App extends Component {
 
   notLoggedIn = () => (
     <Switch>
-      <Route exact path='/' render={(routeProps) => {
-        return (
-          <LandingPage
-            logIn={this.userLogedin}
-            id={this.state.id}
-            history={routeProps.history}
-          />
-        )
-      }} />
+      <Route exact path='/' render={
+
+        (routeProps) => {
+          return (
+            <LandingPage
+              logIn={this.userLogedin}
+              id={this.state.id}
+              history={routeProps.history}
+            />
+          )
+        }} />
+        <Redirect to = "/"/>
     </Switch>
+
 
   )
 
@@ -127,7 +131,16 @@ class App extends Component {
 
   LoggedIn = () => (
     <Switch>
-      <Route exact path="/users/:id" component={ProfilePage} />
+      <Route exact path="/users/:id" render={
+        (routeProps) => {
+          return (
+            < ProfilePage
+              username={this.state.username}
+              avatar={this.state.avatar_url}
+              match = {routeProps.match} />
+          )
+        }} />
+
       <Route path="/shows/:id" render={this.renderShowPage} />
       <Route path="/addshows" render={this.renderAddShows} />
       <Route path="/shows" render={this.renderAllShows} />
@@ -139,7 +152,7 @@ class App extends Component {
 
 
   render() {
-    let { username, avatar_url, login } = this.state
+    let { username, login } = this.state
     return (
       <div className="App">
         <NavBar

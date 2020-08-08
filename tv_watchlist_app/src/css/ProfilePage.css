@@ -1,0 +1,31 @@
+.profile_page{
+    background-color: lightgray;
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(8, 1fr); 
+    grid-template-rows: 50px repeat(auto-fit, minmax(100px,1fr));
+    /* grid-template-areas:
+    "w w w w w w w w w w"
+    "p s s s s s s s s s"
+    "p s s s s s s s s s"; */
+}
+
+#welcome{
+    grid-row: 1;
+    grid-column: 1 / -1;
+    align-self: center;
+    justify-self: center;
+    /* grid-area: w; */
+}
+
+#profile_img{
+    grid-row: 2;
+    /* grid-area: p; */
+}
+
+#shows_component{
+    grid-column: 3;
+    /* grid-area: s; */
+    border: 3px solid black;
+}
+

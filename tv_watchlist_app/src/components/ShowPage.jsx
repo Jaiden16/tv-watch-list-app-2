@@ -36,7 +36,7 @@ export default class ShowPage extends Component {
 
 
     getShowComments = async () => {
-        let { id, comments } = this.state
+        let { id} = this.state
         let url = `/comments/show/${id}`
         try {
             let res = await axios.get(url)
@@ -74,7 +74,7 @@ export default class ShowPage extends Component {
         postObj.user_id = userId
         postObj.show_id = id
         try{
-            let post = await axios.post(url,postObj)
+            await axios.post(url,postObj)
 
         }catch(err){
             console.log(err)

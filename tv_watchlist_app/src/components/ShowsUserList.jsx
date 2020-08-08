@@ -7,18 +7,21 @@ export default function ShowsUserlist(props) {
     // console.log('users', users)
 
     return (
-            users.map((el, ind) => {
-                return (
-                        <Link key={ind} to={`/users/${el.id}`}>
-                            <p>{el.username}</p>
-                            <img src={el.avatar_url}
-                                alt="broken"
-                                height={height}
-                                width={width} />
-                        </Link>
-                    
-                )
-            })
+        users.map((el, ind) => {
+            return (
+                <div key={ind}>
+                    <Link  to={`/users/${el.id}`}>
+                        <p>{el.username}</p>
+                        <img src={el.avatar_url}
+                            alt="broken"
+                            height={height}
+                            width={width} />
+                    </Link>
+                </div>
+
+
+            )
+        })
     )
 
 }
