@@ -1,0 +1,22 @@
+.AddShowComponent{
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: 50px, 1fr;
+}
+#AddShowTitle{
+    grid-row: 1;
+    grid-column: 1 / -1;
+    align-self: center;
+    justify-self: center;
+}
+#left , #right{
+    grid-row: 2;
+}
+
+#left{
+    grid-column: 1 / 4;
+}
+
+#right{
+    grid-column: 5 / 8;
+}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import '../css/ShowPage.css'
 
 export default class ShowPage extends Component {
     constructor(props) {
@@ -70,9 +71,9 @@ export default class ShowPage extends Component {
         let url = '/comments/comment'
         e.preventDefault()
         comments.push(body)
-        postObj.comment_body = body
         postObj.user_id = userId
         postObj.show_id = id
+        postObj.comment_body = body
         try{
             await axios.post(url,postObj)
 
@@ -86,6 +87,9 @@ export default class ShowPage extends Component {
         this.setState({
             body: ""
         })
+        setTimeout(() => {
+            this.getShowComments()
+        }, 300);
     }
 
     componentDidMount() {
@@ -99,15 +103,17 @@ export default class ShowPage extends Component {
         // console.log("title", title)
         // console.log("body", body)
         return (
-            <div>
-                <div>
+            <div className = "ShowPageComponent">
+                <div id = "showTitle">
                     <h1>{title}</h1>
                     <img
                         src={image}
-                        alt="broken" />
+                        alt="broken"
+                        height = "420"
+                        width = "420" />
                 </div>
 
-                <div>
+                <div id = "commentForm">
                     <form onSubmit={this.onSubmit}>
                         <label htmlFor="comment">Comment</label>{" "}
                         <input
@@ -118,13 +124,11 @@ export default class ShowPage extends Component {
                             onChange={this.onChange} />
                         <button type='submit'>Add</button>
                     </form>
-                </div>
 
-                <div>
                     <ul>
                         {comments.map((el,ind)=>{
                             return <li key = {ind}>
-                                <p>{`${el.user_id}: ${el.comment_body}`}</p>
+                                <p>{`${el.username}: ${el.comment_body}`}</p>
                                 </li>
                         })}
                     </ul>

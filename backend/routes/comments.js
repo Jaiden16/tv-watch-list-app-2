@@ -5,7 +5,10 @@ const db = require("../database/database.js");
 //Get Comment by show
 const GetShowComments = async (req, res) => {
     try {
-        let showComments = await db.any(`SELECT * FROM comments Where show_id = ${req.params.show_id}`)
+        let showComments = await db.any(`SELECT comments.id, username, comments.comment_body FROM comments
+                                        JOIN users ON comments.user_id = users.id 
+                                        Where show_id = ${req.params.show_id}
+                                        Order By id`)                                
         res.json({
             comments: showComments,
             message: `Success`

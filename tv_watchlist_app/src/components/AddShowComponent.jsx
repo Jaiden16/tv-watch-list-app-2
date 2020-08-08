@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import '../css/AddShow.css'
 
 export default class AddShow extends Component {
     constructor(props) {
@@ -117,9 +118,9 @@ export default class AddShow extends Component {
 
 
         return (
-            <div>
-                <h1>Add Show</h1>
-                <div>
+            <div className = 'AddShowComponent'>
+                <h1 id = "AddShowTitle">Add Show</h1>
+                <div id = "left">
                     <form onSubmit = {this.showSubmit}>
                         <h2>Start watching Show</h2>
                         <select defaultValue='--all shows--' onChange={this.handleChange} style = {{width: 180}}>
@@ -132,7 +133,7 @@ export default class AddShow extends Component {
                     </form>
                 </div><br /><br />
 
-                <div>
+                <div id = "right">
                     <form onSubmit = {this.addNewShowSubmit}>
                         <h2>Or add a new show</h2>
                         <label htmlFor="url-label">Show Image Url</label><br />

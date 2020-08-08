@@ -14,6 +14,7 @@ import ShowPage from './components/ShowPage';
 import AddShow from './components/AddShowComponent';
 import About from "./components/AboutComponent"
 import LandingPage from './components/LandingPage';
+import UserProfile from "./components/UserProfile"
 
 class App extends Component {
   constructor(props) {
@@ -121,26 +122,23 @@ class App extends Component {
             />
           )
         }} />
-        <Redirect to = "/"/>
+      <Redirect to="/" />
     </Switch>
-
-
   )
-
-
 
   LoggedIn = () => (
     <Switch>
-      <Route exact path="/users/:id" render={
+      <Route exact path="/profile/:id" render={
         (routeProps) => {
           return (
             < ProfilePage
               username={this.state.username}
               avatar={this.state.avatar_url}
-              match = {routeProps.match} />
+              match={routeProps.match} />
           )
         }} />
 
+      <Route exact path="/users/:id" component = {UserProfile}/>
       <Route path="/shows/:id" render={this.renderShowPage} />
       <Route path="/addshows" render={this.renderAddShows} />
       <Route path="/shows" render={this.renderAllShows} />
@@ -168,11 +166,5 @@ class App extends Component {
     );
   }
 }
-
-
-
-
-
-
 
 export default App;
