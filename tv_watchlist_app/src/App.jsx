@@ -23,7 +23,7 @@ class App extends Component {
       id: 2,
       username: "",
       avatar_url: "",
-      login: true
+      login: false
     }
   }
 

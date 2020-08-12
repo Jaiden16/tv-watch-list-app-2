@@ -64,17 +64,21 @@ class UserProfilePage extends Component {
             <div className='profile_page'>
                 <h1 id="welcome">Welcome {username}</h1>
                 <img id="profile_img" src={avatar} alt="broken" />
-                {shows.map((el, index) => {
-                    return <UserShow
-                        key={index}
-                        title={el.title}
-                        genre={el.genre_name}
-                        id={el.show_id}
-                        url={el.img_url} />
-                })}
+                <h2 id = "shows_label">Shows</h2>
+                <div id = "shows">
+                    {shows.map((el, index) => {
+                        return <UserShow
+                            key={index}
+                            title={el.title}
+                            genre={el.genre_name}
+                            id={el.show_id}
+                            url={el.img_url} />
+                    })}
+                </div>
             </div>
         )
     }
 
 }
+
 export default UserProfilePage

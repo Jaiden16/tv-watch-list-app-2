@@ -9,7 +9,7 @@ export default function UserShow(props) {
             <Link to={`/shows/${id}`}>
                 <div>
                     <p>{title}</p>
-                    <img style={{ width: 500, height: 500 }}
+                    <img style={{ width: "100%", height:"100%" }}
                         src={url}
                         alt="broken"
                     />

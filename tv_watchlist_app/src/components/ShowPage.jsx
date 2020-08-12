@@ -89,7 +89,7 @@ export default class ShowPage extends Component {
         })
         setTimeout(() => {
             this.getShowComments()
-        }, 300);
+        }, 1);
     }
 
     componentDidMount() {
