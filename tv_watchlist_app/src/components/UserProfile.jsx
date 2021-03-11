@@ -20,10 +20,10 @@ class UserProfilePage extends Component {
         let url = `/users/${userId}`
         try {
             let res = await axios.get(url)
-            console.log(res)
+            // console.log(res)
             let user = res.data.user
             let { username, avatar_url } = user
-            console.log("user promise", user)
+            // console.log("user promise", user)
 
             this.setState({
                 username: username,
@@ -62,7 +62,7 @@ class UserProfilePage extends Component {
         let { shows, username, avatar } = this.state
         return (
             <div className='profile_page'>
-                <h1 id="welcome">Welcome {username}</h1>
+                <h1 id="welcome"> {username}</h1>
                 <img id="profile_img" src={avatar} alt="broken" />
                 <h2 id = "shows_label">Shows</h2>
                 <div id = "shows">

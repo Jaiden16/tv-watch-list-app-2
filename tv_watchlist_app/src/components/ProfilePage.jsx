@@ -8,9 +8,25 @@ class ProfilePage extends Component {
         super(props)
         this.state = {
             userId: props.match.params.id,
+            userName: "",
             shows: []
 
         }
+    }
+
+    getSingleUser = async () =>{
+        let{username,userId} = this.state
+        let url = `/users/${userId}`
+        try{
+            let res = await axios.get(url);
+            let user = res.data.user;
+            console.log(user);
+
+        }catch(err){
+            console.log(err)
+
+        }
+
     }
 
     getUsersShows = async () => {
@@ -32,6 +48,8 @@ class ProfilePage extends Component {
     }
 
     componentDidMount() {
+        console.log(this.state.userId)
+        this.getSingleUser()
         this.getUsersShows()
     }
 
@@ -41,6 +59,7 @@ class ProfilePage extends Component {
             <div className = 'profile_page'>
                 <h1 id = "welcome">Welcome {this.props.username}</h1>
                 <img id = "profile_img" src = {this.props.avatar} alt = "broken" />
+                <h2 id = "shows_label">Shows</h2>
                 {shows.map((el, index) => {
                     return <UserShow
                         key={index}

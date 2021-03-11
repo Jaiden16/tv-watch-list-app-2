@@ -4,8 +4,8 @@ import ShowsUserlist from './ShowsUserList'
 import "../css/AllUsers.css"
 
 export default class AllUsers extends Component {
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
         this.state = {
             users: []
 

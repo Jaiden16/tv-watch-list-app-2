@@ -93,11 +93,6 @@ class App extends Component {
       match={match.params.id} />
   }
 
-  userLogedin = () => {
-    this.setState({
-      login: true
-    })
-  }
 
   renderLandingPage = () => {
     return <LandingPage
@@ -105,10 +100,17 @@ class App extends Component {
       id={this.state.id} />
   }
 
+  
   renderProfilePage = () => {
-    return <ProfilePage id={this.state.id} />
+    return <ProfilePage />
   }
-
+  
+  userLogedin = () => {
+    this.setState({
+      login: true
+    })
+  }
+  
   notLoggedIn = () => (
     <Switch>
       <Route exact path='/' render={
@@ -128,17 +130,18 @@ class App extends Component {
 
   LoggedIn = () => (
     <Switch>
-      <Route exact path="/profile/:id" render={
-        (routeProps) => {
-          return (
-            < ProfilePage
-              username={this.state.username}
-              avatar={this.state.avatar_url}
-              match={routeProps.match} />
-          )
-        }} />
+      <Route exact path="/profile/:id" component={UserProfile}
+        // (routeProps) => {
+        //   return (
+        //     < ProfilePage
+        //       username={this.state.username}
+        //       avatar={this.state.avatar_url}
+        //       match={routeProps.match} />
+        //   )
+        // }} 
+        />
 
-      <Route exact path="/users/:id" component = {UserProfile}/>
+      <Route exact path="/users/:id" component={UserProfile} />
       <Route path="/shows/:id" render={this.renderShowPage} />
       <Route path="/addshows" render={this.renderAddShows} />
       <Route path="/shows" render={this.renderAllShows} />
