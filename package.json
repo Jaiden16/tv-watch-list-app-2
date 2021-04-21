@@ -1,0 +1,27 @@
+{
+  "name": "tv-watch-list-app-2",
+  "version": "1.0.0",
+  "description": "<img src=\"https://avatars1.githubusercontent.com/u/5825944?s=200&v=4\" width=\"100px\" style=\"text-align: center;\">",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd backend && npm start",
+    "heroku-prebuild": "cd backend && npm install && cd ../frontend && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jaiden16/tv-watch-list-app-2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jaiden16/tv-watch-list-app-2/issues"
+  },
+  "homepage": "https://github.com/Jaiden16/tv-watch-list-app-2#readme"
+}
