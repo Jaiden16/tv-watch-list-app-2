@@ -1,7 +1,7 @@
-DROP DATABASE if exists tvwatchlistapp2;
-CREATE DATABASE tvwatchlistapp2;
+-- DROP DATABASE if exists tvwatchlistapp2;
+-- CREATE DATABASE tvwatchlistapp2;
 
-\c tvwatchlistapp2
+-- \c tvwatchlistapp2
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
