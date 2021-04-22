@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import '../css/AddShow.css'
+import {getAPI} from "../util/util"
+
+const API = getAPI();
 
 export default class AddShow extends Component {
     constructor(props) {
@@ -18,7 +21,7 @@ export default class AddShow extends Component {
     }
 
     getAllMovies = async () => {
-        let url = "/shows"
+        let url = `${API}/shows`
         try {
             let res = await axios.get(url)
             // console.log(res.data.shows)
@@ -33,7 +36,7 @@ export default class AddShow extends Component {
     }
 
     getAllGenres = async () =>{
-        let url = '/genres'
+        let url = `${API}/genres`
         try{
             let res = await axios.get(url)
             console.log('genre',res.data.genre)
@@ -73,7 +76,7 @@ export default class AddShow extends Component {
     showSubmit = async (e) =>{
         e.preventDefault()
         let {movie_value} = this.state
-        let url = "shows/newshowuser"
+        let url = `${API}shows/newshowuser`
         let showObj = {
             user_id: this.state.userId,
             show_id:  movie_value
@@ -90,7 +93,7 @@ export default class AddShow extends Component {
 
     addNewShowSubmit = async (e) =>{
         e.preventDefault()
-        let url = 'shows/newshow'
+        let url = `${API}shows/newshow`
         let newShowObj = {
             title: this.state.show_name,
             img_url: this.state.url,

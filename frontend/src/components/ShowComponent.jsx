@@ -3,6 +3,10 @@ import ShowsUserlist from './ShowsUserList'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import '../css/ShowComponent.css'
+import {getAPI} from "../util/util"
+const API = getAPI();
+
+
 class MasterShow extends Component {
     constructor(props) {
         super(props)
@@ -16,7 +20,7 @@ class MasterShow extends Component {
 
     getShowsUsers = async () => {
         let { id } = this.state
-        let url = `/shows/shows/${id}`
+        let url = `${API}/shows/shows/${id}`
         try {
             let res = await axios.get(url)
             // console.log(res.data.payload)

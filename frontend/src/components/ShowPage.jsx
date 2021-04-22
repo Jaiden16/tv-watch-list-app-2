@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import '../css/ShowPage.css'
+import {getAPI} from "../util/util"
+const API = getAPI();
 
 export default class ShowPage extends Component {
     constructor(props) {
@@ -19,7 +21,7 @@ export default class ShowPage extends Component {
 
     getShowById = async () => {
         let { id } = this.state
-        let url = `/shows/${id}`
+        let url = `${API}/shows/${id}`
         try {
 
             let res = await axios.get(url)
@@ -38,7 +40,7 @@ export default class ShowPage extends Component {
 
     getShowComments = async () => {
         let { id} = this.state
-        let url = `/comments/show/${id}`
+        let url = `${API}/comments/show/${id}`
         try {
             let res = await axios.get(url)
             console.log('res', res.data.comments)
@@ -68,7 +70,7 @@ export default class ShowPage extends Component {
     onSubmit = async (e) => {
         let { comments, body,id, userId } = this.state
         let postObj = {}
-        let url = '/comments/comment'
+        let url = `${API}/comments/comment`
         e.preventDefault()
         comments.push(body)
         postObj.user_id = userId

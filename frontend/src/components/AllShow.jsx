@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import ShowComponent from './ShowComponent'
 import axios from 'axios'
 import '../css/AllShow.css'
+import {getAPI} from '../util/util'
+
+const API = getAPI();
 
 class AllShows extends Component {
     constructor(props) {
@@ -13,7 +16,7 @@ class AllShows extends Component {
     }
 
     getAllshows = async () => {
-        let url = `/shows`
+        let url = `${API}/shows`
         try {
             let res = await axios.get(url)
             // console.log(res.data.shows)

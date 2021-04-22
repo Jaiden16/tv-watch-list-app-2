@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import ShowsUserlist from './ShowsUserList'
 import "../css/AllUsers.css"
+import {getAPI} from "../util/util"
+const API = getAPI();
 
 export default class AllUsers extends Component {
     constructor() {
@@ -13,7 +15,7 @@ export default class AllUsers extends Component {
     }
 
     getUsers = async () => {
-        let url = '/users'
+        let url = `${API}/users`
         try {
             let res = await axios.get(url)
             console.log('res', res)

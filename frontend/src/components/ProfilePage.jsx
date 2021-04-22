@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import UserShow from './UserShowComponent'
 import "../css/ProfilePage.css"
+import {getAPI} from "../util/util"
+const API = getAPI();
 
 class ProfilePage extends Component {
     constructor(props) {
@@ -16,7 +18,7 @@ class ProfilePage extends Component {
 
     getSingleUser = async () =>{
         let{username,userId} = this.state
-        let url = `/users/${userId}`
+        let url = `${API}/users/${userId}`
         try{
             let res = await axios.get(url);
             let user = res.data.user;
@@ -31,7 +33,7 @@ class ProfilePage extends Component {
 
     getUsersShows = async () => {
         let { userId } = this.state
-        let url = `/shows/user/${userId}`
+        let url = `${API}/shows/user/${userId}`
         try {
             let shows = await axios.get(url)
             console.log("user shows", shows.data.showsUser)
