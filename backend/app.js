@@ -12,6 +12,7 @@ var showsRouter = require('./routes/shows');
 var commentsRouter = require(`./routes/comments`)
 
 var app = express();
+app.listen(console.log(process.env.PORT));
 
 app.use(cors())
 app.use(logger('dev'));
