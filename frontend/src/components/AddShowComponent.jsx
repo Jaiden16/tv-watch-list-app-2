@@ -76,7 +76,7 @@ export default class AddShow extends Component {
     showSubmit = async (e) =>{
         e.preventDefault()
         let {movie_value} = this.state
-        let url = `${API}shows/newshowuser`
+        let url = `${API}/shows/newshowuser`
         let showObj = {
             user_id: this.state.userId,
             show_id:  movie_value
@@ -93,7 +93,7 @@ export default class AddShow extends Component {
 
     addNewShowSubmit = async (e) =>{
         e.preventDefault()
-        let url = `${API}shows/newshow`
+        let url = `${API}/shows/newshow`
         let newShowObj = {
             title: this.state.show_name,
             img_url: this.state.url,
@@ -103,7 +103,7 @@ export default class AddShow extends Component {
         }
         try{
             let show = await axios.post(url, newShowObj)
-            console.log(show)
+            
 
         }catch(err){
             console.log(err)
