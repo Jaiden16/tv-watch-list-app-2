@@ -32,7 +32,7 @@ class UserProfilePage extends Component {
             this.setState({
                 username: username,
                 avatar: avatar_url,
-                error: null
+                error: "none"
             })
 
         } catch (err) {
@@ -62,19 +62,20 @@ class UserProfilePage extends Component {
     }
 
     componentDidMount() {
-        this.getUsersShows()
         this.getSingleUser()
+        this.getUsersShows()
     }
 
     render() {
         let { shows, username, avatar, error } = this.state
-        if (error) {
+        if (error === null || error !== "none") {
+            console.log(error)
             return <div>Loading</div>
-        } else
+        } else if (error === "none") {
             return (
                 <div className='profile_page'>
                     <h1 id="welcome"> {username}</h1>
-                    <img id="profile_img" src={avatar} alt="broken" />
+                    <img id="profile_img" src={avatar} alt="Loading" />
                     <h2 id="shows_label">Shows</h2>
                     <div id="shows">
                         {shows.map((el, index) => {
@@ -88,6 +89,9 @@ class UserProfilePage extends Component {
                     </div>
                 </div>
             )
+
+        }
+
     }
 
 }

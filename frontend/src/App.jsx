@@ -29,23 +29,24 @@ class App extends Component {
 
 
 
-  async getSingleUser() {
-    let { id } = this.state
-    let url = `/users/${id}`
-    try {
-      let res = await axios.get(url)
-      console.log(res)
-      let user = res.data.user
-      let { username, avatar_url } = user
+  // async getSingleUser() {
+  //   let { id,username } = this.state
+  //   let url = `/users/${id}`
+  //   try {
+  //     let res = await axios.get(url)
+  //     console.log(res)
+  //     let user = res.data.user
+  //     let { username, avatar_url } = user
 
-      this.setState({
-        username: username,
-        avatar_url: avatar_url
-      })
+  //     this.setState({
+  //       username: username,
+  //       avatar_url: avatar_url
+  //     })
 
-    } catch (err) {
-      console.log(err)
-    }
+  //   } catch (err) {
+  //     console.log(err)
+  //     console.log(username)
+  //   }
 
     // axios.get(url).then((res) => {
     //   // console.log(res)
@@ -60,12 +61,12 @@ class App extends Component {
     //   console.log(err)
     // })
 
-  }
+  //}
 
-  componentDidMount() {
-    this.getSingleUser();
+  // componentDidMount() {
+  //   this.getSingleUser();
 
-  }
+  // }
 
   renderHomepage = () => {
     let { username, avatar_url } = this.state

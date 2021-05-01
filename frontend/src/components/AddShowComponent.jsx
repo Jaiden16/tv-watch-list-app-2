@@ -102,7 +102,8 @@ export default class AddShow extends Component {
 
         }
         try{
-            let show = await axios.post(url, newShowObj)
+            // let show = 
+            await axios.post(url, newShowObj)
             
 
         }catch(err){
