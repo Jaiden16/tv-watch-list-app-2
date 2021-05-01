@@ -7,9 +7,9 @@ export default function UserShow(props) {
     return (
         <div id = "shows_component">
             <Link to={`/shows/${id}`}>
-                <div>
+                <div style ={ {width: 150, height: 200}}>
                     <p>{title}</p>
-                    <img style={{ width: "100%", height:"100%" }}
+                    <img style={{ width: '100%', height:"100%" }}
                         src={url}
                         alt="broken"
                     />

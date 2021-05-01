@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import ShowsUserlist from './ShowsUserList'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import '../css/ShowComponent.css'
-import {getAPI} from "../util/util"
+// import '../css/ShowComponent.css'
+import { getAPI } from "../util/util"
 const API = getAPI();
 
 
@@ -40,7 +40,7 @@ class MasterShow extends Component {
     render() {
         let { id, url, title, users } = this.state
         return (
-            <div className= "show-div">
+            <div className="show-div">
                 <Link to={`shows/${id}`}>
                     <div>
                         <p>{title}</p>
@@ -48,13 +48,13 @@ class MasterShow extends Component {
                             src={url}
                             alt="broken" />
                     </div>
-            </Link>
-            <ShowsUserlist users={users} height ={100} width = {100} />
+                </Link>
+                <ShowsUserlist users={users} height={100} width={100} />
             </div>
         )
     }
 }
-                        
+
 
 //  } (props) {
 //     let { title, id, url } = props
