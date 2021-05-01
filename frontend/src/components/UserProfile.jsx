@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import UserShow from './UserShowComponent'
 import "../css/ProfilePage.css"
-import {getAPI} from "../util/util"
+import { getAPI } from "../util/util"
 const API = getAPI();
 
 
@@ -13,7 +13,8 @@ class UserProfilePage extends Component {
             userId: props.match.params.id,
             shows: [],
             username: "",
-            avatar: ""
+            avatar: "",
+            error: null
 
         }
     }
@@ -30,11 +31,15 @@ class UserProfilePage extends Component {
 
             this.setState({
                 username: username,
-                avatar: avatar_url
+                avatar: avatar_url,
+                error: null
             })
 
         } catch (err) {
             console.log(err)
+            this.setState({
+                error: err
+            })
         }
     }
 
@@ -62,24 +67,27 @@ class UserProfilePage extends Component {
     }
 
     render() {
-        let { shows, username, avatar } = this.state
-        return (
-            <div className='profile_page'>
-                <h1 id="welcome"> {username}</h1>
-                <img id="profile_img" src={avatar} alt="broken" />
-                <h2 id = "shows_label">Shows</h2>
-                <div id = "shows">
-                    {shows.map((el, index) => {
-                        return <UserShow
-                            key={index}
-                            title={el.title}
-                            genre={el.genre_name}
-                            id={el.show_id}
-                            url={el.img_url} />
-                    })}
+        let { shows, username, avatar, error } = this.state
+        if (error) {
+            return <div>Loading</div>
+        } else
+            return (
+                <div className='profile_page'>
+                    <h1 id="welcome"> {username}</h1>
+                    <img id="profile_img" src={avatar} alt="broken" />
+                    <h2 id="shows_label">Shows</h2>
+                    <div id="shows">
+                        {shows.map((el, index) => {
+                            return <UserShow
+                                key={index}
+                                title={el.title}
+                                genre={el.genre_name}
+                                id={el.show_id}
+                                url={el.img_url} />
+                        })}
+                    </div>
                 </div>
-            </div>
-        )
+            )
     }
 
 }
