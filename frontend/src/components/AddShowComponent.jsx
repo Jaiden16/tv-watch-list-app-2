@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import '../css/AddShow.css'
-import {getAPI} from "../util/util"
+import { getAPI } from "../util/util"
 
 const API = getAPI();
 
@@ -15,7 +15,8 @@ export default class AddShow extends Component {
             genre: [],
             genre_value: "",
             url: "",
-            show_name: ""
+            show_name: "",
+            message: ""
 
         }
     }
@@ -35,78 +36,84 @@ export default class AddShow extends Component {
         }
     }
 
-    getAllGenres = async () =>{
+    getAllGenres = async () => {
         let url = `${API}/genres`
-        try{
+        try {
             let res = await axios.get(url)
-            console.log('genre',res.data.genre)
+            console.log('genre', res.data.genre)
             let genre = res.data.genre
             this.setState({
                 genre: genre
             })
 
-        }catch(err){
+        } catch (err) {
             console.log(err)
         }
     }
 
     handleChange = (e) => {
         console.log('value', e.target.value)
-        console.log('id',e.target.id )
+        console.log('id', e.target.id)
         this.setState({
             movie_value: e.target.value
         })
     }
 
-    handleGenreChange = (e) =>{
+    handleGenreChange = (e) => {
         console.log("value", e.target.value)
         this.setState({
             genre_value: e.target.value
         })
     }
 
-    handleTextChange = (e)=>{
-        console.log('target name',e.target.name)
-        console.log('target value',e.target.value)
+    handleTextChange = (e) => {
+        console.log('target name', e.target.name)
+        console.log('target value', e.target.value)
         this.setState({
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
-    showSubmit = async (e) =>{
+    showSubmit = async (e) => {
         e.preventDefault()
-        let {movie_value} = this.state
+        let { movie_value } = this.state
         let url = `${API}/shows/newshowuser`
         let showObj = {
             user_id: this.state.userId,
-            show_id:  movie_value
+            show_id: movie_value
         }
-        try{
-            let show = await axios.post(url,showObj)
+        try {
+            let show = await axios.post(url, showObj)
             console.log(show)
+            this.setState({
+                message: "Now in my watch list"
+            })
 
-        }catch(err){
+        } catch (err) {
             console.log(err)
+            this.setState({
+                message:"Watching this show already"
+            })
         }
 
     }
 
-    addNewShowSubmit = async (e) =>{
+    addNewShowSubmit = async (e) => {
         e.preventDefault()
         let url = `${API}/shows/newshow`
         let newShowObj = {
             title: this.state.show_name,
             img_url: this.state.url,
             genre_id: this.state.genre_value,
-            user_id: this.state.userId 
+            user_id: this.state.userId
 
         }
-        try{
+        try {
             // let show = 
             await axios.post(url, newShowObj)
-            
 
-        }catch(err){
+
+        } catch (err) {
             console.log(err)
         }
     }
@@ -118,16 +125,26 @@ export default class AddShow extends Component {
     }
 
     render() {
-        let { movies, genre } = this.state
+        let { movies, genre, message } = this.state
+
+        if (message) {
+            setTimeout(() => {
+                this.setState({
+                    message: ""
+                }
+                )
+            }, 3000);
+        }
+
 
 
         return (
-            <div className = 'AddShowComponent'>
-                <h1 id = "AddShowTitle">Add Show</h1>
-                <div id = "left">
-                    <form onSubmit = {this.showSubmit}>
+            <div className='AddShowComponent'>
+                <h1 id="AddShowTitle">Add Show</h1>
+                <div id="left">
+                    <form onSubmit={this.showSubmit}>
                         <h2>Start watching Show</h2>
-                        <select defaultValue='--all shows--' onChange={this.handleChange} style = {{width: 180}}>
+                        <select defaultValue='--all shows--' onChange={this.handleChange} style={{ width: 180 }}>
                             <option value='--all shows--' disabled>--All Shows--</option>
                             {movies.map(el => {
                                 return <option key={el.id} value={el.id}>{el.title}</option>
@@ -135,40 +152,41 @@ export default class AddShow extends Component {
                         </select><br /><br />
                         <input type='submit' />
                     </form>
+                    {message ? <p>{message}</p> : null}
                 </div><br /><br />
 
-                <div id = "right">
-                    <form onSubmit = {this.addNewShowSubmit}>
+                <div id="right">
+                    <form onSubmit={this.addNewShowSubmit}>
                         <h2>Or add a new show</h2>
                         <label htmlFor="url-label">Show Image Url</label><br />
-                        <input id='url-label' 
-                        type='text'
-                        name = "url" 
-                        placeholder='paste url' 
-                        required
-                        onChange = {this.handleTextChange}
-                        value = {this.state.url}
-                        style = {{width: 180}}></input><br /> <br />
-                        
+                        <input id='url-label'
+                            type='text'
+                            name="url"
+                            placeholder='paste url'
+                            required
+                            onChange={this.handleTextChange}
+                            value={this.state.url}
+                            style={{ width: 180 }}></input><br /> <br />
+
                         <label htmlFor="show-name">Show Name</label><br />
                         <input id='show-name'
-                        name = "show_name" 
-                        type='text' 
-                        placeholder='type name' 
-                        required
-                        onChange = {this.handleTextChange}
-                        value = {this.state.show_name}
-                        style = {{width: 180}}></input><br /> <br />
-                        
+                            name="show_name"
+                            type='text'
+                            placeholder='type name'
+                            required
+                            onChange={this.handleTextChange}
+                            value={this.state.show_name}
+                            style={{ width: 180 }}></input><br /> <br />
+
                         <label htmlFor="genre">genre</label><br />
-                        <select defaultValue = 'genre' onChange = {this.handleGenreChange} style = {{width: 180}}>
-                            <option value = "genre" disabled>genre</option>
-                            {genre.map((el) =>{
-                                return <option key = {el.id} value = {el.id}>{el.genre_name}</option>
+                        <select defaultValue='genre' onChange={this.handleGenreChange} style={{ width: 180 }}>
+                            <option value="genre" disabled>genre</option>
+                            {genre.map((el) => {
+                                return <option key={el.id} value={el.id}>{el.genre_name}</option>
                             })}
 
                         </select><br /> <br />
-                        <input type = 'submit'/>
+                        <input type='submit' />
                     </form>
                 </div>
 
