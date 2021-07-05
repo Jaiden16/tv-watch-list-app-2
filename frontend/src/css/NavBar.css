@@ -2,6 +2,7 @@
 
 
 .nav-list {
+    width: 100vw;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -19,7 +20,7 @@
     text-align: center;
 }
 
-li a {
+.nav-list a {
     display: block;
     color: white;
     text-align: center;
@@ -33,4 +34,11 @@ li a {
 
 a:hover:not(#brand, #user-list) {
     background-color: gray;
+}
+
+@media screen and (max-width:420px) {
+    .nav-list{
+        display: none;
+    }
+    
 }

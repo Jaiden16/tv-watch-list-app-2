@@ -1,11 +1,23 @@
-.App {
-  /* height: 100vh; */
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 45px auto;
+body{
+  background: #100a1c;
+  background-image:
+  radial-gradient(50% 30% ellipse at center top,
+                  #201e40 0%, rgba(0,0,0,0) 100%),
+  radial-gradient(60% 50% ellipse at center bottom, #261226 0%, #100a1c 100%);
+  color: lightskyblue;
+  background-attachment: fixed;
+  overflow-x: hidden;
 }
 
-.HomePage{
-  grid-column: 1 / -1;
+.page_content, .landing_content{
+  margin-left: 40px;
+  margin-right: 40px;
+}
 
+@media  screen and (max-width: 420px) {
+  .page_content, .landing_content{
+    margin-left: 10px;
+    margin-right: 10px;
+  } 
+  
 }

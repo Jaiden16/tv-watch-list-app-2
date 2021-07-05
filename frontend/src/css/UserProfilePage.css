@@ -1,0 +1,11 @@
+ .profile_page {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     grid-gap: 4px;
+ }
+
+ @media screen and (max-width: 420px) {
+     .profile_page {
+         display: block;
+     }
+ }

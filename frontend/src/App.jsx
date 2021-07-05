@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios'
 import { Switch, Route, Redirect } from 'react-router-dom'
-// import './App.css'
+
+import './App.css'
 
 
 // components 
@@ -29,44 +29,7 @@ class App extends Component {
 
 
 
-  // async getSingleUser() {
-  //   let { id,username } = this.state
-  //   let url = `/users/${id}`
-  //   try {
-  //     let res = await axios.get(url)
-  //     console.log(res)
-  //     let user = res.data.user
-  //     let { username, avatar_url } = user
 
-  //     this.setState({
-  //       username: username,
-  //       avatar_url: avatar_url
-  //     })
-
-  //   } catch (err) {
-  //     console.log(err)
-  //     console.log(username)
-  //   }
-
-    // axios.get(url).then((res) => {
-    //   // console.log(res)
-    //   let user = res.data.user
-    //   // console.log(user)
-    //   let { username, avatar_url } = user
-    //   this.setState({
-    //     username: username,
-    //     avatar_url: avatar_url
-    //   })
-    // }).catch((err) => {
-    //   console.log(err)
-    // })
-
-  //}
-
-  // componentDidMount() {
-  //   this.getSingleUser();
-
-  // }
 
   renderHomepage = () => {
     let { username, avatar_url } = this.state
@@ -101,17 +64,17 @@ class App extends Component {
       id={this.state.id} />
   }
 
-  
+
   renderProfilePage = () => {
     return <ProfilePage />
   }
-  
+
   userLogedin = () => {
     this.setState({
       login: true
     })
   }
-  
+
   notLoggedIn = () => (
     <Switch>
       <Route exact path='/' render={
@@ -124,23 +87,17 @@ class App extends Component {
               history={routeProps.history}
             />
           )
-        }} />
+        }
+      }
+      />
       <Redirect to="/" />
     </Switch>
   )
 
-  LoggedIn = () => (
+  loggedIn = () => (
     <Switch>
-      <Route exact path="/profile/:id" component={UserProfile}
-        // (routeProps) => {
-        //   return (
-        //     < ProfilePage
-        //       username={this.state.username}
-        //       avatar={this.state.avatar_url}
-        //       match={routeProps.match} />
-        //   )
-        // }} 
-        />
+      <Route exact path="/profile/:id" component={UserProfile} 
+      />
 
       <Route exact path="/users/:id" component={UserProfile} />
       <Route path="/shows/:id" render={this.renderShowPage} />
@@ -148,6 +105,7 @@ class App extends Component {
       <Route path="/shows" render={this.renderAllShows} />
       <Route path="/users" render={this.renderAllUsers} />
       <Route path="/about" component={About} />
+      {/* <Redirect to={`/users/${this.id}`}/> */}
     </Switch>
   )
 
@@ -164,8 +122,19 @@ class App extends Component {
           login={this.state.login}
         />
         {
-          login ? this.LoggedIn() : this.notLoggedIn()
+          login ? 
+            <div className="page_content">
+              {this.loggedIn()}
+            </div> :
+            <div className="landing-content">
+            {this.notLoggedIn()}
+
+          </div> 
+
         }
+
+
+
       </div>
     );
   }

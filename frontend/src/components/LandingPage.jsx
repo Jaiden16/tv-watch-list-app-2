@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import pic from '../images/landing_page.jpg'
+import {Link} from "react-router-dom"
+
 import '../css/LandingPage.css'
 
 export default class LandingPage extends Component {
-    
-    pushFunction = () =>{
+
+    pushFunction = () => {
         this.props.logIn()
         this.props.history.push(`/users/${this.props.id}`)
     }
@@ -12,17 +14,20 @@ export default class LandingPage extends Component {
     render() {
         return (
             <div className="Landing">
-                <h1 id="title">Welcome To Movie Night</h1>
-                <div id="image">
+                <h1 className="title">Welcome To Movie Night</h1>
+                <div className="landing-image" >
                     <img
-                        id="photo"
+                        className="landing-photo"
                         src={pic}
                         alt="broken"
-                    /><br />
+                    />
+                    
                 </div>
-                <button id="button" onClick={this.pushFunction}>
+                <Link onClick={this.pushFunction} className="btn btn-white">
                     Enter
-                </button>
+                </Link>
+                
+                
 
             </div>
         )

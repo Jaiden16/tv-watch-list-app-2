@@ -1,0 +1,17 @@
+.shows_collection .shows {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 4px;
+}
+
+.shows_collection .shows_title {
+    text-align: center;
+}
+
+@media screen and (max-width: 420px) {
+    .shows_collection .shows {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 4px;
+    }
+}

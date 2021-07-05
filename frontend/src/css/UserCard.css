@@ -1,0 +1,15 @@
+.user_card .username{
+    text-align: center;
+}
+
+
+@media screen and (max-width: 420px) {
+    .user_card{
+        width: 100%;
+    }
+    .user_card .profile_img{
+        max-width: -webkit-fill-available;
+    }
+    
+    
+}

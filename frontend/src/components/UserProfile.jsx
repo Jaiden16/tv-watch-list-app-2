@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import UserShow from './UserShowComponent'
-import "../css/ProfilePage.css"
 import { getAPI } from "../util/util"
+
+import "../css/UserProfilePage.css"
+
+import UserCard from './UserCard';
+import ShowsCollection from './ShowsCollection';
+
 const API = getAPI();
 
 
@@ -11,7 +15,7 @@ class UserProfilePage extends Component {
         super(props)
         this.state = {
             userId: props.match.params.id,
-            shows: [],
+            usersShows: [],
             username: "",
             avatar: "",
             error: null
@@ -52,7 +56,7 @@ class UserProfilePage extends Component {
             let { showsUser } = shows.data
             // console.log('data', showsUser)
             this.setState({
-                shows: showsUser
+                usersShows: showsUser
             })
 
         } catch (err) {
@@ -67,26 +71,28 @@ class UserProfilePage extends Component {
     }
 
     render() {
-        let { shows, username, avatar, error } = this.state
+        let { usersShows, username, avatar, error } = this.state
         if (error === null || error !== "none") {
             console.log(error)
             return <div>Loading</div>
         } else if (error === "none") {
             return (
                 <div className='profile_page'>
-                    <h1 id="welcome"> {username}</h1>
-                    <img id="profile_img" src={avatar} alt="Loading" />
-                    <h2 id="shows_label">Shows</h2>
-                    <div id="shows">
-                        {shows.map((el, index) => {
-                            return <UserShow
-                                key={index}
-                                title={el.title}
-                                genre={el.genre_name}
-                                id={el.show_id}
-                                url={el.img_url} />
-                        })}
+                    <div className="user_profile_information">
+                        <UserCard username = {username} 
+                        avatar ={avatar}/>
+
                     </div>
+                    
+                    <div className="user_profile_show_collection">
+                        <ShowsCollection shows = {usersShows}/>
+                        
+                        
+                    </div>
+
+
+
+
                 </div>
             )
 

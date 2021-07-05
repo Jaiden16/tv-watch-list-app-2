@@ -1,0 +1,22 @@
+.show_card {
+    text-align: center;
+}
+
+.show_card a{
+    color: lightskyblue;
+    text-decoration: none;
+}
+
+.show_card .card{
+    height: 100%;
+}
+
+.show_card .show_img{
+    height: 100%;
+    width: 100%;
+}
+
+.show_card img{
+    height:120px;
+    width: 120px;
+}
