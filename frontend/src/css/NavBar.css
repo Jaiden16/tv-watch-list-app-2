@@ -20,7 +20,7 @@
     text-align: center;
 }
 
-.nav-list a {
+.nav-list .link {
     display: block;
     color: white;
     text-align: center;
@@ -32,7 +32,7 @@
     background-color: lightskyblue;
 }
 
-a:hover:not(#brand, #user-list) {
+.link:hover:not(#brand, #user-list) {
     background-color: gray;
 }
 

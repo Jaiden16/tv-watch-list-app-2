@@ -4,7 +4,7 @@ import "../css/HamburgerMenu.css"
 
 
 export default function HamburgerMenu(props) {
-    const [showMenu, setShowMenu] = useState(true);
+    const [showMenu, setShowMenu] = useState(false);
     let menu;
     let menuMask;
 

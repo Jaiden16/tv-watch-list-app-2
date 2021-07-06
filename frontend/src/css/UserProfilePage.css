@@ -4,6 +4,10 @@
      grid-gap: 4px;
  }
 
+ .user_profile_information{
+     text-align: center;
+ }
+
  @media screen and (max-width: 420px) {
      .profile_page {
          display: block;
